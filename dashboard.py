@@ -92,15 +92,6 @@ def load_dashboard():
         st.subheader("Maximum closing Rank: ")
         st.subheader(f"{max_opening_rank:,}")
 
-except Exception as e:
-    st.error(f"An error occurred: {e}")
-    st.write("Debug info:")
-    st.write("branch_filter:", branch_filter)
-    st.write("gender_filter:", gender_filter)
-    st.write("quota_filter:", quota_filter)
-    st.write("round_filter:", round_filter)
-    st.write("caste_filter:", caste_filter)
-
 
     st.markdown("----")
 
