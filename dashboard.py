@@ -57,26 +57,33 @@ def load_dashboard():
 
 
     #df_selection = df[branch_filter & gender_filter & quota_filter & round_filter & caste_filter]
-    df_selection={}
-    try:
+   try:
     # Apply filters to the dataframe
-        df_selection = df.loc[branch_filter & gender_filter & quota_filter & round_filter & caste_filter]
-    except Exception as e:
-        st.error("An error occurred: {}".format(e))
-
-    st.title("Dashboard ")
-
+    df_selection = df.loc[branch_filter & gender_filter & quota_filter & round_filter & caste_filter]
+    
+    if df_selection.empty:
+        st.warning("No data matches the selected filters.")
+    else:
+        st.title("Dashboard ")
    
-    #kpis making
-    avg_opening_rank=int(round(df_selection["Opening Rank"].mean(),0))
-    avg_closing_rank=int(round(df_selection["Closing Rank"].mean(),0))
-    max_opening_rank=int(round(df_selection["Opening Rank"].min(),0))
-    min_closing_rank=int(round(df_selection["Closing Rank"].max(),0))
+        # KPIs
+        avg_opening_rank = int(round(df_selection["Opening Rank"].mean(), 0))
+        avg_closing_rank = int(round(df_selection["Closing Rank"].mean(), 0))
+        max_opening_rank = int(round(df_selection["Opening Rank"].min(), 0))
+        min_closing_rank = int(round(df_selection["Closing Rank"].max(), 0))
+        
+        left_col, middle_col, right_col = st.columns(3)
+       
+        # Add other columns and KPIs here
 
-
-
-    left_col,middle_col,right_col=st.columns(3)
-
+except Exception as e:
+    st.error(f"An error occurred: {e}")
+    st.write("Debug info:")
+    st.write("branch_filter:", branch_filter)
+    st.write("gender_filter:", gender_filter)
+    st.write("quota_filter:", quota_filter)
+    st.write("round_filter:", round_filter)
+    st.write("caste_filter:", caste_filter)
     with left_col:
         st.subheader("Average Opening Rank: ")
         st.subheader(f"{avg_opening_rank:,}")
@@ -93,7 +100,14 @@ def load_dashboard():
         st.subheader("Maximum closing Rank: ")
         st.subheader(f"{max_opening_rank:,}")
 
-
+except Exception as e:
+    st.error(f"An error occurred: {e}")
+    st.write("Debug info:")
+    st.write("branch_filter:", branch_filter)
+    st.write("gender_filter:", gender_filter)
+    st.write("quota_filter:", quota_filter)
+    st.write("round_filter:", round_filter)
+    st.write("caste_filter:", caste_filter)
 
 
     st.markdown("----")
