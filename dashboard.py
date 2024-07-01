@@ -76,14 +76,6 @@ def load_dashboard():
        
         # Add other columns and KPIs here
 
-except Exception as e:
-    st.error(f"An error occurred: {e}")
-    st.write("Debug info:")
-    st.write("branch_filter:", branch_filter)
-    st.write("gender_filter:", gender_filter)
-    st.write("quota_filter:", quota_filter)
-    st.write("round_filter:", round_filter)
-    st.write("caste_filter:", caste_filter)
     with left_col:
         st.subheader("Average Opening Rank: ")
         st.subheader(f"{avg_opening_rank:,}")
